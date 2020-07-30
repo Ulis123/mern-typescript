@@ -1,0 +1,48 @@
+{
+  "name": "express-test",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "lint": "tslint -c tslint.json -p tsconfig.json --fix",
+    "prettier": "prettier --write '**/*.{tsx,ts,jsx,js,json}'",
+    "client": "cd client && yarn start",
+    "server": "nodemon server.ts",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.23.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.25",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.7",
+    "@types/hapi__joi": "^17.1.4",
+    "@types/helmet": "^0.0.47",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/mongoose": "^5.7.32",
+    "@types/morgan": "^1.9.1",
+    "@types/node": "^14.0.23",
+    "concurrently": "^5.2.0",
+    "husky": "^4.2.5",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5",
+    "ts-node": "^8.10.2",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.3.0",
+    "typescript": "^3.9.7"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint && yarn prettier"
+    }
+  }
+}
