@@ -10,7 +10,7 @@ const router = express.Router();
 router.post(
   "/api/login",
   signIn,
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, _next: NextFunction) => {
     const { email, password } = req.body;
     try {
       const user = await User.findOne({ email });
@@ -35,7 +35,7 @@ router.post(
 router.post(
   "/api/signup",
   signUp,
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, _next: NextFunction) => {
     const { email } = req.body;
     try {
       const user = await User.findOne({ email });
@@ -58,7 +58,7 @@ router.post(
 
 router.post(
   "/api/signout",
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (_req: Request, res: Response, _next: NextFunction) => {
     try {
       res.setHeader("x-auth-token", "");
       return res.status(200).json({ message: "Sign Out success" });

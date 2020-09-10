@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, Dispatch, FormEvent } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,7 +11,15 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Link as RouterLink } from "react-router-dom";
-import { LogInValuesType } from "../types";
+import { LogInValuesType, ValidationErrorsType } from "../types";
+
+interface LogInPropTypes {
+  handleSubmitLogIn: (e: FormEvent) => void;
+  logInValues: LogInValuesType;
+  setLogInValues: Dispatch<LogInValuesType>;
+  errors: ValidationErrorsType;
+  message: { type: string; message: string };
+}
 
 const Copyright: React.FC = () => (
   <Typography variant="body2" color="textSecondary" align="center">
@@ -44,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LogIn = ({
+const LogIn: React.FC<LogInPropTypes> = ({
   handleSubmitLogIn,
   logInValues,
   setLogInValues,
@@ -56,6 +64,7 @@ const LogIn = ({
   const handleInputs = (e: ChangeEvent<HTMLInputElement>) => {
     e.persist();
     const { name, value } = e.target;
+    // @ts-ignore
     setLogInValues((prevState: LogInValuesType) => ({
       ...prevState,
       [name]: value,
@@ -109,7 +118,7 @@ const LogIn = ({
           >
             Sign In
           </Button>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <Grid item>
               <Link to="/signup" variant="body2" component={RouterLink}>
                 {"Don't have an account? Sign Up"}

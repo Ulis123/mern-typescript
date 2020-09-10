@@ -8,15 +8,9 @@ export interface SignUpValuesType extends LogInValuesType {
   name: string;
 }
 
-export interface ValidationErrorsLogInType {
-  email?: string;
-  password?: string;
-}
+type ValueType = keyof SignUpValuesType;
 
-interface ValidationErrorsSignUpType extends ValidationErrorsLogInType {
-  username?: string;
-  name?: string;
-}
+export type ValidationErrorsType = Partial<Record<ValueType, string>>;
 
 type PathType<T> = keyof T;
 

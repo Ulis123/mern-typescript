@@ -5,7 +5,6 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import "./App.css";
 import Home from "./pages/Home";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
@@ -25,7 +24,7 @@ import {
   ErrorType,
   LogInValuesType,
   SignUpValuesType,
-  ValidationErrorsSignUpType,
+  ValidationErrorsType,
 } from "./types";
 import About from "./pages/About";
 import setAuthToken from "./utils/setAuthToken";
@@ -43,7 +42,7 @@ const App = () => {
     username: "",
     name: "",
   });
-  const [errors, setErrors] = useState<ValidationErrorsSignUpType>({});
+  const [errors, setErrors] = useState<ValidationErrorsType>({});
   const [message, setMessage] = useState({ type: "", message: "" });
 
   useEffect(() => {

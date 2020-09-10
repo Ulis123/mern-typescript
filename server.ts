@@ -9,7 +9,6 @@ import connectDB from "./db";
 connectDB();
 
 const { NODE_ENV, PORT } = process.env;
-
 const IN_PROD = NODE_ENV === "production";
 
 const app = express();
@@ -28,7 +27,7 @@ if (IN_PROD) {
   app.use(express.static(path.join(__dirname, "client/build")));
 
   // Handle React routing, return all requests to React app
-  app.get("*", function (req: Request, res: Response) {
+  app.get("*", function (_req: Request, res: Response) {
     res.sendFile(path.join(__dirname, "client/build", "index.html"));
   });
 }

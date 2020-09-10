@@ -1,6 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
 import { User } from "../models";
-import { generateAccessToken } from "../helpers";
 import { authTokenCheck } from "../middlewares/authTokenCheck";
 import { config } from "dotenv";
 config();
@@ -10,7 +9,7 @@ const router = express.Router();
 router.get(
   "/api/me",
   authTokenCheck,
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: Request, res: Response, _next: NextFunction) => {
     try {
       // @ts-ignore
       const userId = req.user.id;

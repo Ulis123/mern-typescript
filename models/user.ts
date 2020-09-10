@@ -37,7 +37,7 @@ userSchema.pre("save", async function (this: UserDocument) {
 userSchema.statics.hash = (password: string): Promise<string> =>
   hash(password, 10);
 
-userSchema.methods.matchesPassword = function (
+userSchema.methods.matchesPassword = async function (
   this: UserDocument,
   password: string
 ): Promise<boolean> {

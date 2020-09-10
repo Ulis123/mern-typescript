@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, Dispatch, FormEvent } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,7 +11,15 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Link as RouterLink } from "react-router-dom";
-import { SignUpValuesType } from "../types";
+import { SignUpValuesType, ValidationErrorsType } from "../types";
+
+interface SignUpPropTypes {
+  handleSubmitSignUp: (e: FormEvent) => void;
+  signUpValues: SignUpValuesType;
+  setInputValues: Dispatch<SignUpValuesType>;
+  errors: ValidationErrorsType;
+  message: { type: string; message: string };
+}
 
 function Copyright() {
   return (
@@ -46,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUp = ({
+const SignUp: React.FC<SignUpPropTypes> = ({
   handleSubmitSignUp,
   signUpValues,
   setInputValues,
@@ -58,6 +66,7 @@ const SignUp = ({
   const handleInputs = (e: ChangeEvent<HTMLInputElement>) => {
     e.persist();
     const { name, value } = e.target;
+    // @ts-ignore
     setInputValues((prevState: SignUpValuesType) => ({
       ...prevState,
       [name]: value,
@@ -141,7 +150,7 @@ const SignUp = ({
           >
             Sign Up
           </Button>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <Grid item>
               <Link to="/login" variant="body2" component={RouterLink}>
                 Already have an account? Sign in
